@@ -1,0 +1,20 @@
+package main
+
+import ( 
+	"io"
+	"net/http"
+	"log"
+	"os"
+)
+
+func hello(w http.ResponseWriter, r *http.Request){
+	io.WriteString(w,"Hello World")
+}
+
+func main (){
+
+	port:= os.Getenv("PORT")
+	http.HandleFunc("/",hello)
+	log.Print("listening to:"+port)
+	log.Fatal(http.ListenAndServe(":"+port,nil))
+}
